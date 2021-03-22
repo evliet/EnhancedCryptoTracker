@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import Coin from './Coin';
+import { useMediaQuery } from 'react-responsive';
 
 function App() {
   const [coins, setCoins] = useState([]);
@@ -34,12 +35,14 @@ function App() {
         <form>
           <input
             className='coin-input'
+            overlay='white-slight'
             type='text'
             onChange={handleChange}
-            placeholder='Search'
+            placeholder='Search Here'
           />
         </form>
       </div>
+      <h2>Refresh page to keep current</h2>
       {filteredCoins.map(coin => {
         return (
           <Coin
@@ -48,9 +51,11 @@ function App() {
             price={coin.current_price}
             symbol={coin.symbol}
             marketcap={coin.total_volume}
+            marketcaprank={coin.market_cap_rank}
             volume={coin.market_cap}
             image={coin.image}
             priceChange={coin.price_change_percentage_24h}
+            circulatingsupply={coin.circulating_supply}
           />
         );
       })}
